@@ -1,11 +1,10 @@
 
 import os
 import fnmatch
-count = int
 
 
 def main():
-    option=getMenu()
+    option=int(getMenu())
     
     if option == 1:
        listFileTypes()
@@ -16,21 +15,24 @@ def main():
     
     
 def fileDeletion():
+    count=int(0)
+    print("")
+    fileType=input("What file extension would you like to delete? (Please insert with a .")
     for root, dir, files in os.walk("."):
         #print(root)
         #print("")
         for items in fnmatch.filter(files, "*"):
-            if items.endswith(".jpg"):
+            if items.endswith(fileType):
                     #os.remove(items)
                 print(os.path.join(root, items))
                 os.remove(os.path.join(root, items))
-                count=+1
+                count+=1
     print("")
-    print(count + " files deleted")
-      #  for items in fnmatch.filter(files, "*"):
-     #           print(items)
-     #   print("")
-  
+    print(count , " files deleted")
+    main()
+    
+    
+    
 def listFileTypes():
     return
      
