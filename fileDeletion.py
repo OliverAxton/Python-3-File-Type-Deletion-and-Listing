@@ -12,6 +12,8 @@ def main():
         fileDeletion()
     elif option == 2:
         searchByExtension()
+    elif option == 4:
+        manualMode()
     else: exit() 
     
     
@@ -37,7 +39,22 @@ def fileDeletion():
     else: main()
     
     
-    
+def manualMode():    
+    count=int(0)
+    print("")
+    fileType=input("What file extension would you like to search for? (Please insert with a .) ")
+    for root, dir, files in os.walk("."):
+        for items in fnmatch.filter(files, "*"):
+            if items.endswith(fileType):
+                print(os.path.join(root, items))
+                UserWantsDeleted=input("Would you like to delete " + items + "? (y/n): ")
+                if UserWantsDeleted == "y":
+                    os.remove(os.path.join(root, items))
+                    count+=1  
+    print("")
+    print("All files searched and manually kept/removed")
+    print("")
+    main()
     
     
     
@@ -68,9 +85,10 @@ def getMenu():
     
     print("1. List all file types and count on system")
     print("2. Search files by extension")
-    print("3. Delete all files with chosen file extension")
+    print("3. Delete all files automatically with chosen file extension")
+    print("4. Scan files by file extension with manual option to delete, open or leave")
 
-    print("4. Exit")
+    print("5. Exit")
     option=input("Select option: ")
     return option
     
